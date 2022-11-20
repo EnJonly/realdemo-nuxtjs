@@ -1,0 +1,43 @@
+[
+  {
+    "path": "/",
+    "component": "D:\\\\woke\\\\realdemo-nuxtjs\\\\pages\\\\layout",
+    "children": [
+      {
+        "path": "",
+        "name": "home",
+        "component": "D:\\\\woke\\\\realdemo-nuxtjs\\\\pages\\\\home"
+      },
+      {
+        "path": "/login",
+        "name": "login",
+        "component": "D:\\\\woke\\\\realdemo-nuxtjs\\\\pages\\\\login"
+      },
+      {
+        "path": "/register",
+        "name": "register",
+        "component": "D:\\\\woke\\\\realdemo-nuxtjs\\\\pages\\\\login"
+      },
+      {
+        "path": "/profile/:username",
+        "name": "profile",
+        "component": "D:\\\\woke\\\\realdemo-nuxtjs\\\\pages\\\\profile"
+      },
+      {
+        "path": "/settings",
+        "name": "settings",
+        "component": "D:\\\\woke\\\\realdemo-nuxtjs\\\\pages\\\\settings"
+      },
+      {
+        "path": "/editor",
+        "name": "editor",
+        "component": "D:\\\\woke\\\\realdemo-nuxtjs\\\\pages\\\\editor"
+      },
+      {
+        "path": "/article/:slug",
+        "name": "article",
+        "component": "D:\\\\woke\\\\realdemo-nuxtjs\\\\pages\\\\article"
+      }
+    ]
+  }
+]
