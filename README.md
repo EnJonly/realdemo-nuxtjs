@@ -1,8 +1,5 @@
 # RealWorld
 
-# 项目地址
-http://60.188.244.235:3030
-
 ```sh
 # 安装依赖
 npm install
