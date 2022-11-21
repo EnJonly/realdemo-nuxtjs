@@ -38,6 +38,8 @@
 <script>
 import { mapState } from 'vuex'
 import { getProfiles, uptateUser } from '@/api/user'
+// 仅在客户端加载 js-cookie 包
+const Cookie = process.client ? require('js-cookie') : undefined
 
 export default {
   middleware: 'authenticated',
@@ -57,12 +59,15 @@ export default {
   },
   async mounted() {
     let { data } = await getProfiles(this.user.username)
-    this.profile = Object.assign({}, this.user, data.profile)
+    this.profile = Object.assign({}, data.profile, this.user)
   },
   methods: {
     uptateSetting() {
       uptateUser({user: this.profile}).then(res => {
-        this.$store.commit('setUser', {...this.user, ...this.profile})
+        let userInfo = {...this.user, ...this.profile}
+        this.$store.commit('setUser', userInfo)
+        // 为了防止刷新页面数据丢失，我们需要把数据持久化
+        Cookie.set('user', userInfo)
         this.$router.push({ path: `/profile/${this.profile.username}` })
       })
     }
