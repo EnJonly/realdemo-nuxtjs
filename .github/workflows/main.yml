@@ -19,6 +19,7 @@ jobs:
       uses: actions/setup-node@master
     - run: rm -rf .nuxt
     - run: npm install
+    - run: npm run dev
     - run: npm run build
     - run: tar -zcvf release.tgz .nuxt static nuxt.config.js package.json package-lock.json pm2.config.json
 
