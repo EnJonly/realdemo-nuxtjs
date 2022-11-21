@@ -6,15 +6,15 @@
         <div class="row">
 
           <div class="col-xs-12 col-md-10 offset-md-1">
-            <img src="http://i.imgur.com/Qr71crq.jpg" class="user-img" />
-            <h4>Eric Simons</h4>
+            <img :src="user.image" class="user-img" />
+            <h4>{{user.username}}</h4>
             <p>
-              Cofounder @GoThinkster, lived in Aol's HQ for a few months, kinda looks like Peeta from the Hunger Games
+              {{user.bio}}
             </p>
             <button class="btn btn-sm btn-outline-secondary action-btn">
               <i class="ion-plus-round"></i>
               &nbsp;
-              Follow Eric Simons
+              Follow {{user.username}}
             </button>
           </div>
 
@@ -28,56 +28,34 @@
         <div class="col-xs-12 col-md-10 offset-md-1">
           <div class="articles-toggle">
             <ul class="nav nav-pills outline-active">
-              <li class="nav-item">
-                <a class="nav-link active" href="">My Articles</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="">Favorited Articles</a>
+              <li class="nav-item" v-for="(item, index) in taps" :key="item">
+                <a class="nav-link" :class="{active: +active === index}" :href="`/profile/${user.username}?t=${index}`">
+                  {{item}}
+                </a>
               </li>
             </ul>
           </div>
 
-          <div class="article-preview">
+          <div class="article-preview" v-for="(item, index) in acticleList" :key="index">
             <div class="article-meta">
-              <a href=""><img src="http://i.imgur.com/Qr71crq.jpg" /></a>
+              <a href=""><img :src="item.author.image" /></a>
               <div class="info">
-                <a href="" class="author">Eric Simons</a>
-                <span class="date">January 20th</span>
+                <a href="" class="author">{{item.author.username}}</a>
+                <span class="date">{{item.updatedAt |  date('MMM DD, YYYY')}}</span>
               </div>
-              <button class="btn btn-outline-primary btn-sm pull-xs-right">
-                <i class="ion-heart"></i> 29
+              <button class="btn btn-outline-primary btn-sm pull-xs-right"  @click="handleDel(item)">
+                <i class="ion-heart"></i> {{item.favoritesCount}}
               </button>
             </div>
             <a href="" class="preview-link">
-              <h1>How to build webapps that scale</h1>
-              <p>This is the description for the post.</p>
+              <h1>{{item.title}}</h1>
+              <p>{{item.description}}</p>
               <span>Read more...</span>
             </a>
           </div>
-
-          <div class="article-preview">
-            <div class="article-meta">
-              <a href=""><img src="http://i.imgur.com/N4VcUeJ.jpg" /></a>
-              <div class="info">
-                <a href="" class="author">Albert Pai</a>
-                <span class="date">January 20th</span>
-              </div>
-              <button class="btn btn-outline-primary btn-sm pull-xs-right">
-                <i class="ion-heart"></i> 32
-              </button>
-            </div>
-            <a href="" class="preview-link">
-              <h1>The song you won't ever stop singing. No matter how hard you try.</h1>
-              <p>This is the description for the post.</p>
-              <span>Read more...</span>
-              <ul class="tag-list">
-                <li class="tag-default tag-pill tag-outline">Music</li>
-                <li class="tag-default tag-pill tag-outline">Song</li>
-              </ul>
-            </a>
+          <div class="article-preview" v-show="acticleList.length === 0">
+            No articles are here... yet.
           </div>
-
-
         </div>
 
       </div>
@@ -87,9 +65,49 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+import { getArticles, deleteFavorite } from '@/api/article'
+
+const getArtList = function(t = 0, name) {
+  return getArticles(t == 0 ? {author: name} : {favorited: name})
+}
 export default {
   middleware: 'authenticated',
-  name: 'UserProfile'
+  name: 'UserProfile',
+  async asyncData({ query, store }) {
+
+    const {data} = await getArtList(query.t, store.state.user.username)
+
+    return {
+      taps: [ 'My Articles', 'Favorited Articles' ],
+      acticleList: data.articles,
+      active: query.t || 0,
+    }
+  },
+  data() {
+    return {
+    }
+  },
+  async mounted() {
+    // const {data} = await getArticles({
+    //   favorited: this.user.username,
+    //   limit: 5,
+    //   offset:0
+    // })
+
+    // console.log(data)
+  },
+  methods: {
+    handleDel(article) {
+      deleteFavorite(article.slug).then(async () => {
+        const{data} = await getArtList(this.active, this.user.username)
+        this.acticleList = data.articles
+      })
+    }
+  },
+  computed: {
+    ...mapState(['user'])
+  }
 }
 </script>
 

@@ -6,38 +6,46 @@
       {
         "path": "",
         "name": "home",
-        "component": "D:\\\\woke\\\\realdemo-nuxtjs\\\\pages\\\\home"
+        "component": "D:\\\\woke\\\\realdemo-nuxtjs\\\\pages\\\\home",
+        "_name": "_5f9b14e9"
       },
       {
         "path": "/login",
         "name": "login",
-        "component": "D:\\\\woke\\\\realdemo-nuxtjs\\\\pages\\\\login"
+        "component": "D:\\\\woke\\\\realdemo-nuxtjs\\\\pages\\\\login",
+        "_name": "_d8005ec2"
       },
       {
         "path": "/register",
         "name": "register",
-        "component": "D:\\\\woke\\\\realdemo-nuxtjs\\\\pages\\\\login"
+        "component": "D:\\\\woke\\\\realdemo-nuxtjs\\\\pages\\\\login",
+        "_name": "_d8005ec2"
       },
       {
         "path": "/profile/:username",
         "name": "profile",
-        "component": "D:\\\\woke\\\\realdemo-nuxtjs\\\\pages\\\\profile"
+        "component": "D:\\\\woke\\\\realdemo-nuxtjs\\\\pages\\\\profile",
+        "_name": "_6c74f55f"
       },
       {
         "path": "/settings",
         "name": "settings",
-        "component": "D:\\\\woke\\\\realdemo-nuxtjs\\\\pages\\\\settings"
+        "component": "D:\\\\woke\\\\realdemo-nuxtjs\\\\pages\\\\settings",
+        "_name": "_992c71a6"
       },
       {
         "path": "/editor",
         "name": "editor",
-        "component": "D:\\\\woke\\\\realdemo-nuxtjs\\\\pages\\\\editor"
+        "component": "D:\\\\woke\\\\realdemo-nuxtjs\\\\pages\\\\editor",
+        "_name": "_41233212"
       },
       {
         "path": "/article/:slug",
         "name": "article",
-        "component": "D:\\\\woke\\\\realdemo-nuxtjs\\\\pages\\\\article"
+        "component": "D:\\\\woke\\\\realdemo-nuxtjs\\\\pages\\\\article",
+        "_name": "_533f38ac"
       }
-    ]
+    ],
+    "_name": "_29857e98"
   }
 ]
